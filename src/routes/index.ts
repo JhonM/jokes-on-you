@@ -1,10 +1,11 @@
 import express, { Response, Request, Router, NextFunction } from "express";
 import { ErrorStatus } from "../types";
 import { requireJsonContent } from "../middleware";
-import jokesController from "../controllers/jokes-controller";
+import cors from "cors";
 
 const router = Router();
 const apiPrefixName = "api";
+router.use(cors());
 
 router.use(express.json({ limit: 100 }));
 
@@ -32,15 +33,10 @@ const getFavourites = (
     { id: "3", name: "Macbook", price: 3454.34, brand: "Apple" },
   ];
 
-  response.status(200).json(favourites);
+  return response.status(200).json(favourites);
 };
 
-router.get("/", (request: Request, response: Response) => {
-  const jokes = jokesController();
-  response.send(jokes);
-});
-
-router.get(`/favourites`, getFavourites);
+router.get(`/${apiPrefixName}/favourites`, getFavourites);
 
 router.get(
   `/${apiPrefixName}/favourite/:id`,

@@ -8,5 +8,14 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "sourceMap":true
-  }
+  },
+    "include": [
+    "src/**/*", "src/types.ts"
+  ],
+  "exclude": [
+    "frontend/**/*",
+    "node_modules",
+    "dist"
+  ]
+
 }

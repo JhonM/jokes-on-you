@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import path from "path";
 
 import helmet from "helmet";
@@ -20,7 +20,13 @@ const globalRateLimiter = rateLimit({
 });
 
 app.use(requestLogger);
+app.use(express.static(path.join(__dirname, "../frontend", "dist")));
+
 app.use(routes);
+
+app.get("*", (request: Request, response: Response) => {
+  response.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+});
 
 app.use(helmet());
 app.use("/*", globalRateLimiter);
