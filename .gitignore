@@ -5,3 +5,13 @@ dist/*
 .env
 /coverage/
 /src/**/*.log
+
+# Frontend directory
+src/frontend/node_modules
+src/frontend/.parcel-cache
+src/frontend/.cache
+src/frontend/dist
+src/frontend/.DS_Store
+
+#data
+datastore.json

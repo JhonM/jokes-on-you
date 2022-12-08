@@ -1,10 +1,13 @@
 import express, { Response, Request, Router, NextFunction } from "express";
+import isomorphicFetch from "isomorphic-fetch";
+import cors from "cors";
 import { ErrorStatus } from "../types";
 import { requireJsonContent } from "../middleware";
-import jokesController from "../controllers/jokes-controller";
+import repo from "../repository";
 
 const router = Router();
 const apiPrefixName = "api";
+router.use(cors());
 
 router.use(express.json({ limit: 100 }));
 
@@ -32,15 +35,49 @@ const getFavourites = (
     { id: "3", name: "Macbook", price: 3454.34, brand: "Apple" },
   ];
 
-  response.status(200).json(favourites);
+  return response.status(200).json(favourites);
 };
 
-router.get("/", (request: Request, response: Response) => {
-  const jokes = jokesController();
-  response.send(jokes);
-});
+const getRandomJokes = async (amount: number) => {
+  const buildFetch = [amount].reduce((acc, amount) => {
+    let current = 0;
+    while (current < amount) {
+      const fetchUrl = isomorphicFetch(
+        "https://api.chucknorris.io/jokes/random"
+      ).then((response) => response.json());
+      acc.push(fetchUrl);
+      current++;
+    }
 
-router.get(`/favourites`, getFavourites);
+    return acc;
+  }, [] as Promise<any>[]);
+
+  const data = Promise.all(buildFetch);
+
+  return data.then((res) => res);
+};
+
+router.get(
+  `/${apiPrefixName}/random-joke`,
+  async (_: Request, response: Response) => {
+    const data = await isomorphicFetch(
+      "https://api.chucknorris.io/jokes/random"
+    ).then((response) => response.json());
+
+    return response.status(200).json(data);
+  }
+);
+
+router.get(
+  `/${apiPrefixName}/random-jokes`,
+  async (_: Request, response: Response) => {
+    const data = await getRandomJokes(10);
+
+    return response.status(200).json(data);
+  }
+);
+
+router.get(`/${apiPrefixName}/favourites`, getFavourites);
 
 router.get(
   `/${apiPrefixName}/favourite/:id`,
@@ -58,11 +95,12 @@ router.get(
 router.post(
   `/${apiPrefixName}/favourites`,
   requireJsonContent,
-  (request: Request, response: Response) => {
-    favourites.push({ ...request.body });
+  async (request: Request, response: Response) => {
+    const addedRecord = await repo.createNewRecord({ ...request.body });
 
-    const favouriteCreationResponse = { productId: 2, result: "success" };
-    response.json(favouriteCreationResponse);
+    console.log(`Added Record: ${JSON.stringify(addedRecord, null, 4)}`);
+
+    response.send("Information added to the datastore");
   }
 );
 
