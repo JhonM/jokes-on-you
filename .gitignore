@@ -5,8 +5,9 @@ dist/*
 .env
 /coverage/
 /src/**/*.log
+datastore.json
 
 # Frontend directory
-frontend/node_modules
-frontend/.parcel-cache
-frontend/dist
+src/frontend/node_modules
+src/frontend/.parcel-cache
+src/frontend/dist

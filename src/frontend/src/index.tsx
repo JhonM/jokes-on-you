@@ -2,7 +2,9 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as dotenv from "dotenv";
-import { App } from "./App";
+import "./app.css";
+import { Home } from "./pages/Home";
+import { Favourites } from "./pages/Favourites";
 
 dotenv.config();
 
@@ -13,7 +15,8 @@ if (app) {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

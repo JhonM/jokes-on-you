@@ -20,12 +20,12 @@ const globalRateLimiter = rateLimit({
 });
 
 app.use(requestLogger);
-app.use(express.static(path.join(__dirname, "../frontend", "dist")));
+app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
 app.use(routes);
 
 app.get("*", (request: Request, response: Response) => {
-  response.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  response.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
 app.use(helmet());

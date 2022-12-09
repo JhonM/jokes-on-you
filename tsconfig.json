@@ -13,7 +13,7 @@
     "src/**/*", "src/types.ts"
   ],
   "exclude": [
-    "frontend/**/*",
+    "src/frontend/**/*",
     "node_modules",
     "dist"
   ]

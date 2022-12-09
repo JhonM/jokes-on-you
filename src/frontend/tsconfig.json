@@ -23,9 +23,6 @@
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "global.d.ts"
-  ],
   "include": [
     "src/**/*", "src/types.ts"
   ],
