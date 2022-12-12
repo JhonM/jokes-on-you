@@ -8,6 +8,6 @@ dist/*
 datastore.json
 
 # Frontend directory
-src/frontend/node_modules
-src/frontend/.parcel-cache
-src/frontend/dist
+frontend/node_modules
+frontend/.parcel-cache
+frontend/dist

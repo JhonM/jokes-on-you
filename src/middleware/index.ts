@@ -49,5 +49,5 @@ export const invalidPathHandler = (
   next: NextFunction
 ) => {
   response.status(400);
-  response.send("invalid path");
+  return response.send({ status: 400 });
 };

@@ -25,19 +25,19 @@ test_watch:
 	npm run test:watch
 
 clean_frontend:
-	cd src/frontend && rm -rf node_modules && rm -rf dist
+	cd frontend && rm -rf node_modules && rm -rf dist
 
 install_frontend:
-	cd src/frontend && npm install
+	cd frontend && npm install
 
 lint_frontend:
-	cd src/frontend && npm run verify
+	cd frontend && npm run verify
 
 dev_frontend:
-	cd src/frontend && npm run start
+	cd frontend && npm run start
 
 build_frontend:
-	cd src/frontend && npm run build
+	cd frontend && npm run build
 
 clean_frontend_cache:
-	cd src/frontend && rm -rf .parcel-cache
+	cd frontend && rm -rf .parcel-cache

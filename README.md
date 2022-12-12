@@ -38,9 +38,30 @@ make lint
 make prod
 ```
 
-## Create .env local file
+## Development frontend
+
+```Shell
+make dev_frontend
+```
+
+## Build_frontend version
+
+```Shell
+make build_frontend
+```
+
+## Clean_frontend
+
+```Shell
+make clean_frontend
+```
+
+## Install_frontend
+
+```Shell
+make install_frontend
+```
 
 ```Shell
 API_BASE_PATH=https://api.chucknorris.io
-API_KEY=XXXXX
 ```

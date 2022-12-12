@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
+import bodyParser from "body-parser";
 
 import helmet from "helmet";
 import rateLimit, { MemoryStore } from "express-rate-limit";
@@ -20,12 +21,13 @@ const globalRateLimiter = rateLimit({
 });
 
 app.use(requestLogger);
-app.use(express.static(path.join(__dirname, "frontend", "dist")));
+app.use(express.static(path.join(__dirname, "../frontend", "dist")));
 
+app.use(bodyParser.json());
 app.use(routes);
 
-app.get("*", (request: Request, response: Response) => {
-  response.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+app.get("*", (_: Request, response: Response) => {
+  response.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
 });
 
 app.use(helmet());

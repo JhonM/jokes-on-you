@@ -1,7 +1,7 @@
 import fs from "fs";
 import type { FavouriteType } from "../types/favourites";
 
-class Repository {
+class FavouriteRepo {
   filename: string;
 
   constructor(filename: string) {
@@ -52,6 +52,14 @@ class Repository {
 
     return id;
   }
+
+  async getAllRecords() {
+    const jsonRecords = await fs.promises.readFile(this.filename, {
+      encoding: "utf8",
+    });
+
+    return JSON.parse(jsonRecords);
+  }
 }
 
-export default new Repository("datastore.json");
+export default new FavouriteRepo("datastore.json");
