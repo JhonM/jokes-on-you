@@ -13,6 +13,10 @@ jobs:
       - name: install npm and dependencies
         run: |
           make
+      - name: code style
+        run: |
+          make lint
+          make lint_frontend
       - name: run test
         run: |
           make test
