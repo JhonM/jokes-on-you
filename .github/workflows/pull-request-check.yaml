@@ -1,0 +1,22 @@
+name: Pull-Request Check
+
+on: [push, pull_request]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: install npm and dependencies
+        run: |
+          make
+      - name: run test
+        run: |
+          make test
+      - name: build apps
+        run: |
+          make build_frontend
+          make build
