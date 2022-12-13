@@ -1,4 +1,4 @@
-default: clean install clean_frontend install_frontend
+default: clean install clean_frontend install_frontend build_app;
 
 clean:
 	rm -rf node_modules && rm -rf dist
@@ -41,3 +41,6 @@ build_frontend:
 
 clean_frontend_cache:
 	cd frontend && rm -rf .parcel-cache
+
+build_app:
+	cd frontend && npm run build && cd - && npm run build
