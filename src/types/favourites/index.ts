@@ -4,10 +4,3 @@ export type JokeType = {
   icon_url: string;
   value: string;
 };
-
-export type FavouriteType = {
-  id: string;
-  name: string;
-  price: number;
-  brand: string;
-};

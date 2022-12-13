@@ -1,5 +1,5 @@
 import fs from "fs";
-import type { FavouriteType } from "../types/favourites";
+import type { JokeType } from "../types/favourites";
 
 class FavouriteRepo {
   filename: string;
@@ -40,7 +40,7 @@ class FavouriteRepo {
       encoding: "utf8",
     });
 
-    const favourites: FavouriteType[] = JSON.parse(jsonRecords);
+    const favourites: JokeType[] = JSON.parse(jsonRecords);
     const removeFavourite = favourites.filter(
       (favourite) => favourite.id !== id
     );

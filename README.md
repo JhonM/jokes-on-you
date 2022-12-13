@@ -61,7 +61,3 @@ make clean_frontend
 ```Shell
 make install_frontend
 ```
-
-```Shell
-API_BASE_PATH=https://api.chucknorris.io
-```
