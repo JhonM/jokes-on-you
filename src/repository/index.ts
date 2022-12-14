@@ -41,16 +41,16 @@ class FavouriteRepo {
     });
 
     const favourites: JokeType[] = JSON.parse(jsonRecords);
-    const removeFavourite = favourites.filter(
+    const updatedFavourites = favourites.filter(
       (favourite) => favourite.id !== id
     );
 
     await fs.promises.writeFile(
       this.filename,
-      JSON.stringify(removeFavourite, null, 2)
+      JSON.stringify(updatedFavourites, null, 2)
     );
 
-    return id;
+    return { id, favourites: updatedFavourites };
   }
 
   async getAllRecords() {

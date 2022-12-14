@@ -55,5 +55,5 @@ export const deleteFavourite = async (request: Request, response: Response) => {
 
   console.log(`Delete Record: ${JSON.stringify(deleteRecord, null, 4)}`);
 
-  return response.send({ success: true });
+  return response.send({ success: true, payload: deleteRecord });
 };

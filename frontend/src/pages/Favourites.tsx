@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-simple-toasts";
 import { getFavourites, deleteFromFavourites } from "../api";
 import type { JokeType } from "../types";
@@ -8,7 +8,7 @@ import { JokeFavourites } from "../components/JokeFavourites";
 export const Favourites = () => {
   const [favourites, setFavourites] = useState<JokeType[]>();
   const data: JokeType[] = getFavourites();
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (data) {
       setFavourites(data);
@@ -18,10 +18,15 @@ export const Favourites = () => {
   const handleRemoveFavourite = useCallback(
     (id: string) => {
       deleteFromFavourites(id)
-        .then(() => navigate(0))
+        .then(() => {
+          const updatedFavourites = favourites?.filter(
+            (favourite) => favourite.id !== id
+          );
+          setFavourites(updatedFavourites);
+        })
         .finally(() => toast("Removed from favourites"));
     },
-    [setFavourites]
+    [setFavourites, favourites]
   );
 
   return (
